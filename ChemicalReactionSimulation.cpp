@@ -21,7 +21,7 @@ int main(){
     cin>>BQuantity;
     CQuantity=0;
 
-    double K1, K2, dt, T;
+    double K1, K2, dt, T, dAB, dC;
     cout<<"Reaction Constants (K1, K2): ";
     cin>>K1>>K2;
     dt = 0.01;
@@ -35,9 +35,11 @@ int main(){
         putpixel(t/dt+XZero , YZero-CQuantity , BLUE );    //A & B Initial Quantity
         delay(20);
 
-        AQuantity = AQuantity + (K2*CQuantity - K1*AQuantity*BQuantity)*dt;
-        BQuantity = BQuantity + (K2*CQuantity - K1*AQuantity*BQuantity)*dt;
-        CQuantity = CQuantity + (2*K1*AQuantity*BQuantity - 2*K2*CQuantity)*dt;
+				dAB = K2*CQuantity - K1*AQuantity*BQuantity;
+				dC = 2*K1*AQuantity*BQuantity - 2*K2*CQuantity;
+        AQuantity = AQuantity + dAB*dt;
+        BQuantity = BQuantity + dAB*dt;
+        CQuantity = CQuantity + dC*dt;
     }
     getch();
 	closegraph();
