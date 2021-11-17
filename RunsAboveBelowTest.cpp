@@ -9,7 +9,7 @@ int main(){
     myfile.open("RunsAboveBelowTest.txt");
 
     double Average, Run, n1, n2;
-    int aboveflag, Random1, Random2, Range;
+    int aboveflag, Random, Range;
     Range = 100;
     aboveflag = 0;
     Average = (Range - 1)/2;
@@ -17,26 +17,23 @@ int main(){
     n1 = 0;
     n2 = 0;
 
-    Random1 = rand()%Range;
-    myfile<<Random1<<" ";
-    if(Random1>Average)n1++;
-    else n2++;
-
-    for(int i=1;i<N;i++){
-        Random2 = rand()%Range;
-        myfile<<Random2<<" ";
-        if(Random2>Average)n1++;
-        else n2++;
-
-        if(Random2>Random1 && aboveflag == 0){
-            Run++;
-            aboveflag = 1;
+    for(int i=0;i<N;i++){
+        Random = rand()%Range;
+        myfile<<Random<<" ";
+        if(Random>Average){
+            n1++;
+            if(aboveflag == 0){
+                Run++;
+                aboveflag = 1;
+            }
         }
-        if(Random2<Random1 && aboveflag == 1){
-            Run++;
-            aboveflag = 0;
+        if(Random<Average){
+            n2++;
+            if(aboveflag == 1 || (aboveflag == 0 && i ==0)){
+                Run++;
+                aboveflag = 0;
+            }
         }
-        Random1 = Random2;
     }
 
     double Mean, SD, Randomness, Z;
